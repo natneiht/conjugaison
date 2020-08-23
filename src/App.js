@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
+import MainPage from './containers/MainPage'
 
-function App() {
+function App () {
+  // const randArray = generateRandomNumberArray(30, 1, 10900);
+  // console.log(randArray);
+  // console.log(data);
+  // randArray.map((item) => console.log(data[item]["Infinitif"]["Présent"][0]));
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <MainPage />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
