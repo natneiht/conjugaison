@@ -4,21 +4,26 @@ import PropTypes from 'prop-types'
 class FinalResult extends PureComponent {
   render () {
     const { result } = this.props
+    // console.log(result)
     const totalCorrect = result.filter(item => item['result'] == 'Correct')
       .length
     const totalWrong = result.filter(item => item['result'] == 'Wrong').length
+    // console.log(totalCorrect)
+    // console.log(totalWrong)
     return (
-      <div className='container' style={{ marginTop: '100px' }}>
+      <div
+        className='container content-container
+'
+      >
         <div className='row'>
           <h5>
             Number of correct answers:{' '}
-            <span style={{ color: 'green' }}>{totalCorrect}</span>
+            <span className='correct'>{totalCorrect}</span>
           </h5>
         </div>
         <div className='row'>
           <h5>
-            Number of wrong answers:{' '}
-            <span style={{ color: 'red' }}>{totalCorrect}</span>
+            Number of wrong answers: <span className='wrong'>{totalWrong}</span>
           </h5>
         </div>
 
@@ -27,22 +32,22 @@ class FinalResult extends PureComponent {
           {result.map(item => {
             if (item['result'] == 'Wrong') {
               return (
-                <div className='row'>
+                <div className='row' key={item['questionNum']}>
                   <div className='col-1'> {item['questionNum'] + 1}</div>
                   <div className='col-2'>
                     {' '}
-                    <span style={{ color: 'red' }}>
+                    <span className='wrong'>
                       <b>{item['question']['infinitif']}</b>
                     </span>
                   </div>
                   <div className='col-3'>
-                    <span style={{ color: 'green' }}>
+                    <span className='correct'>
                       {item['question']['pronom']}
                     </span>{' '}
                     - <span>{item['question']['temp']} de l'indicatif</span>
                   </div>
                   <div className='col-3'>
-                    <s>{item['userAnswer']}</s>
+                    <s>{item['userAnswer'] ? item['userAnswer'] : '-'}</s>
                   </div>
                   <div className='col-3'>{item['answer']}</div>
                 </div>

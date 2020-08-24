@@ -10,6 +10,9 @@ function App () {
   // randArray.map((item) => console.log(data[item]["Infinitif"]["Présent"][0]));
   return (
     <div className='App'>
+      <div className='header'>
+        <h4>Conjugaison des verbes français</h4>
+      </div>
       <MainPage />
     </div>
   )

@@ -28,11 +28,60 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header {
+  background-color: #96a575;
+  color: white;
+  vertical-align: middle;
+  padding-top: 8px;
+  height: 50px;
+  width: 100%;
+}
+
+.btn-info,
+.btn-info:hover,
+.btn-info:active,
+.btn-info:visited {
+  background-color: #96a575 !important;
+}
+
+.correct,
+.pronom-highlight {
+  color: green;
+  font-weight: bold;
+}
+
+.wrong {
+  color: red;
+  font-weight: bold;
+}
+
+.show-meaning {
+  color: gray;
+}
+
+.max-question-select {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 15px;
+}
+
+.content-container {
+  margin-top: 100px;
+}
+
+.temp-list {
+  padding-left: 45px;
+  text-align: left;
+}
+
+.main-start-button {
+  width: 60%;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
 }

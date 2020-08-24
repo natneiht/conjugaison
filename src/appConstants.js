@@ -1,15 +1,14 @@
 export const modeDuVerbe = ['Indicatif']
-export const tempDuVerbe = [
-  'Présent',
-  'Présent',
-  'Présent', // To make it appear more frequently than others
-  'Plus-que-parfait',
-  'Passé simple',
-  'Passé composé',
-  'Passé antérieur',
-  'Imparfait',
-  'Futur simple'
-]
+export const tempDuVerbe = {
+  Présent: true,
+  'Plus-que-parfait': true,
+  'Passé simple': true,
+  'Passé composé': true,
+  'Passé antérieur': false,
+  'Futur antérieur': false,
+  Imparfait: true,
+  'Futur simple': true
+}
 export const pronomList = [
   "Je/J'",
   'Tu',
@@ -124,3 +123,23 @@ export const tempOfAuxiliary = {
   'Passé antérieur': 'Passé simple',
   'Futur antérieur': 'Futur simple'
 }
+
+export const specialCharacters = [
+  'ç',
+  'à',
+  'â',
+  'æ',
+  'è',
+  'é',
+  'ê',
+  'ë',
+  'œ',
+  'ô',
+  'ö',
+  'ï',
+  'î',
+  'û',
+  'ü',
+  'ù',
+  'ÿ'
+]
