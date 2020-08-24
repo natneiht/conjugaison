@@ -85,3 +85,9 @@
 .align-right {
   text-align: right;
 }
+
+.correct-icon,
+.wrong-icon {
+  width: 20px;
+  height: 20px;
+}

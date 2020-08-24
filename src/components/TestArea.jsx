@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import FinalResult from './FinalResult'
 import meaning from '../translation.json'
 import { specialCharacters } from '../appConstants'
+// import CorrectIcon from '../svg/correct.svg'
+// import WrongIcon from '../svg/wrong.svg'
 
 class TestArea extends PureComponent {
   constructor (props) {
@@ -111,7 +113,15 @@ class TestArea extends PureComponent {
             </h3>
           </div>
           <div className='col-6 align-right'>
-            Correct: <span className='correct'>{totalCorrect}</span> | Wrong:{' '}
+            <img
+              src={process.env.PUBLIC_URL + '/svg/correct.svg'}
+              className='correct-icon'
+            />{' '}
+            <span className='correct'>{totalCorrect}</span> |{' '}
+            <img
+              src={process.env.PUBLIC_URL + '/svg/wrong.svg'}
+              className='wrong-icon'
+            />{' '}
             <span className='wrong'>{totalWrong}</span>
           </div>
         </div>

@@ -17,13 +17,14 @@ class FinalResult extends PureComponent {
       >
         <div className='row'>
           <h5>
-            Number of correct answers:{' '}
+            Nombre de bonnes réponses:{' '}
             <span className='correct'>{totalCorrect}</span>
           </h5>
         </div>
         <div className='row'>
           <h5>
-            Number of wrong answers: <span className='wrong'>{totalWrong}</span>
+            Nombre de mauvaises réponses:{' '}
+            <span className='wrong'>{totalWrong}</span>
           </h5>
         </div>
 

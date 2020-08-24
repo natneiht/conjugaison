@@ -91,7 +91,7 @@ class MainPage extends PureComponent {
       loading
     } = this.state
     // console.log(questionList)
-    if (!(questionList.length > 0)) return <div>Loading...</div>
+    if (!(questionList.length > 0)) return <div>Chargement...</div>
     const tempListArray = Object.keys(tempList)
     const questionNumList = [
       10,
@@ -115,7 +115,7 @@ class MainPage extends PureComponent {
           <>
             <div className='form-group row'>
               <label htmlFor='maxVerb' className='col-sm-4 col-form-label'>
-                How many verbs?
+                Combien de verbes?
               </label>
               <div className='col-sm-4'>
                 {/* <input
@@ -153,7 +153,7 @@ class MainPage extends PureComponent {
                   disabled={loading}
                   // onClick={() => this.generateQuestions()}
                 >
-                  {loading ? 'Loading...' : 'Start'}
+                  {loading ? 'Chargement...' : 'Commencer'}
                 </button>
               </div>
             </div>
