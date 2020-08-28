@@ -1,9 +1,10 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
 import MainPage from './containers/MainPage'
+require('dotenv').config()
 
 function App () {
+  console.clear()
   return (
     <div className='App'>
       <div className='header'>

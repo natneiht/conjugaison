@@ -1,15 +1,12 @@
 import React, { PureComponent } from 'react'
-// import data from '../data/verbs.json'
 import {
   generateRandomNumberArray,
   getRandomInt,
   getAnswer,
   getAuxiliary
 } from '../functions'
-import { tempDuVerbe, pronomList, verbWithEtre } from '../appConstants'
-import PropTypes from 'prop-types'
+import { tempDuVerbe, pronomList, questionNumList } from '../appConstants'
 import TestArea from '../components/TestArea'
-import { db } from '../database'
 import { commonVerbs } from '../commonVerb'
 
 class MainPage extends PureComponent {
@@ -34,18 +31,22 @@ class MainPage extends PureComponent {
     const promiseList = []
     const tempListKeys = Object.keys(tempList)
     const tempListArray = tempListKeys.filter(item => {
-      if (tempList[item] == true) return item
+      if (tempList[item] === true) return item
     })
-    // console.log(tempListArray)
-    // Make random questions and get answers
+
+    // Generate a random array of question number
     const maxCommonVerb = commonVerbs.length - 1
     const randArray = generateRandomNumberArray(maxVerb, 1, maxCommonVerb)
 
     randArray.forEach(async item => {
+      // Get question contents
       promiseList.push(getAnswer(commonVerbs[item]))
     })
+
+    // Fetch answer from database
     const answerList = await Promise.all(promiseList)
-    // console.log(answerList)
+
+    // Generate random pronoun and tense
     const questionList = answerList.map(item => {
       const tempNum = getRandomInt(0, tempListArray.length - 1)
       const pronomNum = getRandomInt(0, pronomList.length - 1)
@@ -55,9 +56,12 @@ class MainPage extends PureComponent {
 
       const infinitif = item['Infinitif']['Présent'][0]
 
+      // Check auxiliary (if it has)
       const auxiliary = getAuxiliary(infinitif, temp, pronomNum)
-      // console.log(auxiliary)
-      if (item['Indicatif'][temp] == undefined) console.log(item)
+
+      if (item['Indicatif'][temp] === undefined) console.log(item) // Check error verbs
+
+      // Finall array of questions and their answers
       return {
         infinitif,
         temp,
@@ -66,7 +70,7 @@ class MainPage extends PureComponent {
         answer: item['Indicatif'][temp][pronomNum]
       }
     })
-    // console.log(questionList)
+
     this.setState({ questionList, loading: false })
   }
 
@@ -81,62 +85,30 @@ class MainPage extends PureComponent {
     newTempList[temp] = status
     this.setState({ tempList: newTempList })
   }
+
   render () {
-    const {
-      start,
-      final,
-      maxVerb,
-      questionList,
-      tempList,
-      loading
-    } = this.state
-    // console.log(questionList)
+    const { start, maxVerb, questionList, tempList, loading } = this.state
     if (!(questionList.length > 0)) return <div>Chargement...</div>
     const tempListArray = Object.keys(tempList)
-    const questionNumList = [
-      10,
-      20,
-      30,
-      40,
-      50,
-      60,
-      70,
-      80,
-      90,
-      100,
-      150,
-      200,
-      250
-    ]
+
     return (
       <div className='container content-container'>
-        {/* {loading && <div>Please wait for a few seconds...</div>} */}
         {!start && (
           <>
             <div className='form-group row'>
               <label htmlFor='maxVerb' className='col-sm-4 col-form-label'>
-                Combien de verbes?
+                Nombre de verbes:
               </label>
               <div className='col-sm-4'>
-                {/* <input
-                  className='form-control-plaintext'
-                  type='text'
-                  name='maxVerb'
-                  className='form-control'
-                  value={maxVerb}
-                  onChange={e => this.setState({ maxVerb: e.target.value })}
-                /> */}
                 <select
                   name='maxVerb'
                   id='maxVerb'
                   className='max-question-select'
+                  onChange={e => this.setState({ maxVerb: e.target.value })}
+                  value={maxVerb}
                 >
                   {questionNumList.map(item => (
-                    <option
-                      value={item}
-                      key={item}
-                      onChange={e => this.setState({ maxVerb: e.target.value })}
-                    >
+                    <option value={item} key={item}>
                       {item}
                     </option>
                   ))}
@@ -151,9 +123,8 @@ class MainPage extends PureComponent {
                     this.startTest()
                   }}
                   disabled={loading}
-                  // onClick={() => this.generateQuestions()}
                 >
-                  {loading ? 'Chargement...' : 'Commencer'}
+                  {loading ? 'Chargement...' : 'Démarrer'}
                 </button>
               </div>
             </div>

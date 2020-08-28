@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import FinalResult from './FinalResult'
 import meaning from '../translation.json'
 import { specialCharacters } from '../appConstants'
-// import CorrectIcon from '../svg/correct.svg'
-// import WrongIcon from '../svg/wrong.svg'
 
 class TestArea extends PureComponent {
   constructor (props) {
@@ -38,7 +36,7 @@ class TestArea extends PureComponent {
 
     const newResult = [...result]
 
-    if (currentAnswer == correctAnswer) {
+    if (currentAnswer === correctAnswer) {
       newResult.push({
         questionNum: currentQuestion,
         result: 'Correct',
@@ -94,10 +92,8 @@ class TestArea extends PureComponent {
       result
     } = this.state
     const { questionList, totalQuestion } = this.props
-    // console.log(questionList)
+
     const questionContent = questionList[currentQuestion]
-    // console.log(questionContent)
-    // console.log(result)
 
     if (final) return <FinalResult result={result} />
 
@@ -115,11 +111,13 @@ class TestArea extends PureComponent {
           <div className='col-6 align-right'>
             <img
               src={process.env.PUBLIC_URL + '/svg/correct.svg'}
+              alt='correct-icon'
               className='correct-icon'
             />{' '}
             <span className='correct'>{totalCorrect}</span> |{' '}
             <img
               src={process.env.PUBLIC_URL + '/svg/wrong.svg'}
+              alt='wrong-icon'
               className='wrong-icon'
             />{' '}
             <span className='wrong'>{totalWrong}</span>
@@ -152,7 +150,7 @@ class TestArea extends PureComponent {
           <div className='col-12'>
             <b>
               <h4>
-                {questionContent['temp'] == 'Imparfait'
+                {questionContent['temp'] === 'Imparfait'
                   ? `à l'Imparfait`
                   : `au ${questionContent['temp']}`}{' '}
                 de l'indicatif
