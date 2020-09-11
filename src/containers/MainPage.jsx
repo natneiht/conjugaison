@@ -86,7 +86,7 @@ class MainPage extends PureComponent {
     this.setState({ start: true })
   }
 
-  changeTempStatus = (temps, status) => {
+  changeTempsFixStatus = (temps, status) => {
     const { tempsList } = this.state
     const newTempsList = { ...tempsList }
     newTempsList[temps] = status
