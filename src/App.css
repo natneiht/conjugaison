@@ -28,7 +28,8 @@
   color: #61dafb;
 }
 
-.header {
+.header,
+footer {
   background-color: #96a575;
   color: white;
   vertical-align: middle;
