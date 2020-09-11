@@ -67,9 +67,10 @@
 
 .content-container {
   margin-top: 100px;
+  margin-bottom: 100px;
 }
 
-.temp-list {
+.temps-list {
   padding-left: 45px;
   text-align: left;
 }

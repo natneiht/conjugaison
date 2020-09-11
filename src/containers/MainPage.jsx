@@ -5,7 +5,7 @@ import {
   getAnswer,
   getAuxiliary
 } from '../functions'
-import { tempDuVerbe, pronomList, questionNumList } from '../appConstants'
+import { sampleTempsList, pronomList, questionNumList } from '../appConstants'
 import TestArea from '../components/TestArea'
 import { commonVerbs } from '../commonVerb'
 
@@ -17,21 +17,28 @@ class MainPage extends PureComponent {
       final: false,
       maxVerb: 20,
       questionList: [],
-      tempList: tempDuVerbe,
+      tempsList: sampleTempsList,
       loading: true
     }
   }
 
   componentDidMount () {
+    try {
+      const localTempsList = JSON.parse(localStorage.getItem('tempsList'))
+      if (localTempsList) this.setState({ tempsList: localTempsList })
+    } catch {
+      localStorage.clear()
+      this.setState({ tempsList: sampleTempsList })
+    }
     this.generateQuestions()
   }
 
   generateQuestions = async () => {
-    const { maxVerb, tempList } = this.state
+    const { maxVerb, tempsList } = this.state
     const promiseList = []
-    const tempListKeys = Object.keys(tempList)
-    const tempListArray = tempListKeys.filter(item => {
-      if (tempList[item] === true) return item
+    const tempsListKeys = Object.keys(tempsList)
+    const tempsListArray = tempsListKeys.filter(item => {
+      if (tempsList[item] === true) return item
     })
 
     // Generate a random array of question number
@@ -48,26 +55,26 @@ class MainPage extends PureComponent {
 
     // Generate random pronoun and tense
     const questionList = answerList.map(item => {
-      const tempNum = getRandomInt(0, tempListArray.length - 1)
+      const tempsNum = getRandomInt(0, tempsListArray.length - 1)
       const pronomNum = getRandomInt(0, pronomList.length - 1)
 
-      const temp = tempListArray[tempNum]
+      const temps = tempsListArray[tempsNum]
       const pronom = pronomList[pronomNum]
 
       const infinitif = item['Infinitif']['Présent'][0]
 
       // Check auxiliary (if it has)
-      const auxiliary = getAuxiliary(infinitif, temp, pronomNum)
+      const auxiliary = getAuxiliary(infinitif, temps, pronomNum)
 
-      if (item['Indicatif'][temp] === undefined) console.log(item) // Check error verbs
+      if (item['Indicatif'][temps] === undefined) console.log(item) // Check error verbs
 
       // Finall array of questions and their answers
       return {
         infinitif,
-        temp,
+        temps,
         pronom,
         auxiliary,
-        answer: item['Indicatif'][temp][pronomNum]
+        answer: item['Indicatif'][temps][pronomNum]
       }
     })
 
@@ -79,17 +86,20 @@ class MainPage extends PureComponent {
     this.setState({ start: true })
   }
 
-  changeTempStatus = (temp, status) => {
-    const { tempList } = this.state
-    const newTempList = { ...tempList }
-    newTempList[temp] = status
-    this.setState({ tempList: newTempList })
+  changeTempStatus = (temps, status) => {
+    const { tempsList } = this.state
+    const newTempsList = { ...tempsList }
+    newTempsList[temps] = status
+    // Save "temps" option for next time
+    localStorage.setItem('tempsList', JSON.stringify(newTempsList))
+
+    this.setState({ tempsList: newTempsList })
   }
 
   render () {
-    const { start, maxVerb, questionList, tempList, loading } = this.state
+    const { start, maxVerb, questionList, tempsList, loading } = this.state
     if (!(questionList.length > 0)) return <div>Chargement...</div>
-    const tempListArray = Object.keys(tempList)
+    const tempsListArray = Object.keys(tempsList)
 
     return (
       <div className='container content-container'>
@@ -130,15 +140,15 @@ class MainPage extends PureComponent {
             </div>
             <div className=' form-group row'>
               <div className='col-sm-4' />
-              <div className='col-sm-8 temp-list'>
-                {tempListArray.map(item => (
+              <div className='col-sm-8 temps-list'>
+                {tempsListArray.map(item => (
                   <div className='form-check' key={item}>
                     <input
                       className='form-check-input'
                       type='checkbox'
-                      checked={tempList[item]}
+                      checked={tempsList[item]}
                       onChange={e =>
-                        this.changeTempStatus(item, e.target.checked)
+                        this.changeTempsStatus(item, e.target.checked)
                       }
                       id={item}
                     />

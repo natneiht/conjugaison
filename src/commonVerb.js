@@ -3,7 +3,7 @@ export const commonVerbs = [
   'abasourdir',
   'abattre',
   'abolir',
-  'absoudre',
+  // 'absoudre',
   'abstenir',
   'accepter',
   'acclamer',

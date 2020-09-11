@@ -150,9 +150,9 @@ class TestArea extends PureComponent {
           <div className='col-12'>
             <b>
               <h4>
-                {questionContent['temp'] === 'Imparfait'
+                {questionContent['temps'] === 'Imparfait'
                   ? `à l'Imparfait`
-                  : `au ${questionContent['temp']}`}{' '}
+                  : `au ${questionContent['temps']}`}{' '}
                 de l'indicatif
               </h4>
             </b>

@@ -1,8 +1,8 @@
 import { db } from './database'
 import {
   verbWithEtre,
-  composeTemp,
-  tempOfAuxiliary,
+  composeTemps,
+  tempsOfAuxiliary,
   auxConjugaison
 } from './appConstants'
 
@@ -30,12 +30,12 @@ export function getAnswer (verb) {
   })
 }
 
-export function getAuxiliary (verb, temp, pronom) {
+export function getAuxiliary (verb, temps, pronom) {
   const aux = verbWithEtre.includes(verb) ? 'être' : 'avoir'
-  if (composeTemp.includes(temp)) {
-    const convertedTemp = tempOfAuxiliary[temp]
-    // console.log(convertedTemp)
-    return auxConjugaison[aux]['Indicatif'][convertedTemp][pronom]
+  if (composeTemps.includes(temps)) {
+    const convertedTemps = tempsOfAuxiliary[temps]
+    // console.log(convertedTemps)
+    return auxConjugaison[aux]['Indicatif'][convertedTemps][pronom]
   } else {
     return null
   }

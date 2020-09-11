@@ -1,5 +1,5 @@
 export const modeDuVerbe = ['Indicatif']
-export const tempDuVerbe = {
+export const sampleTempsList = {
   Présent: true,
   'Plus-que-parfait': true,
   'Passé simple': true,
@@ -38,7 +38,7 @@ export const verbWithEtre = [
   'sortir'
 ]
 
-export const composeTemp = [
+export const composeTemps = [
   'Passé composé',
   'Plus-que-parfait',
   'Passé antérieur',
@@ -117,7 +117,7 @@ export const auxConjugaison = {
   }
 }
 
-export const tempOfAuxiliary = {
+export const tempsOfAuxiliary = {
   'Passé composé': 'Présent',
   'Plus-que-parfait': 'Imparfait',
   'Passé antérieur': 'Passé simple',
