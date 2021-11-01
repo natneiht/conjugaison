@@ -11,7 +11,7 @@ function App () {
         <h4>La conjugaison des verbes français</h4>
       </div>
       <MainPage />
-      <div className='footer'>Copyright © 2020 by Huynh Thien Tan.</div>
+      <div className='footer'>Par Huynh Thien Tan - 2020</div>
     </div>
   )
 }

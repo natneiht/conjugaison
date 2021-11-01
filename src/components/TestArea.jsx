@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FinalResult from './FinalResult'
 import meaning from '../translation.json'
 import { specialCharacters } from '../appConstants'
+import KeyboardInput from './KeyboardInput'
 
 class TestArea extends PureComponent {
   constructor (props) {
@@ -81,6 +82,10 @@ class TestArea extends PureComponent {
     }
   }
 
+  insertSymbol = (sym) =>{
+    this.setState({currentAnswer: this.state.currentAnswer + sym})
+  }
+
   render () {
     const {
       currentQuestion,
@@ -88,7 +93,7 @@ class TestArea extends PureComponent {
       final,
       totalCorrect,
       totalWrong,
-      showMeTheMeaning,
+      showMeTheMeaning, // of being lonely
       result
     } = this.state
     const { questionList, totalQuestion } = this.props
@@ -161,22 +166,16 @@ class TestArea extends PureComponent {
 
         <div className='row'>
           <input
+            autoFocus
             type='text'
             className='form-control'
             value={currentAnswer}
             onChange={e => this.setState({ currentAnswer: e.target.value })}
           />
-          {specialCharacters.map(item => (
-            <button
-              className='btn btn-light'
-              key={item}
-              onClick={() =>
-                this.setState({ currentAnswer: currentAnswer + item })
-              }
-            >
-              {item}
-            </button>
-          ))}
+          </div>
+        <div className='row' style={{display: 'block', textAlign: 'center', marginTop: '5px'}}>
+
+        <KeyboardInput insertSymbol={this.insertSymbol}/>
         </div>
         <div className='row' style={{ marginTop: '10px' }}>
           <div className='col-12'>
@@ -186,7 +185,7 @@ class TestArea extends PureComponent {
                 this.checkAnswer()
               }}
             >
-              {currentQuestion < totalQuestion - 1 ? 'Next' : 'Finish'}
+              {currentQuestion < totalQuestion - 1 ? 'Suivant' : 'Finir'}
             </button>
           </div>
         </div>
